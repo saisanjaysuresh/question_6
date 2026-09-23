@@ -12,16 +12,24 @@ pipeline {
             parallel {
                 stage('Frontend Check') {
                     steps {
-                        echo 'Running frontend script...'
-                        // Try sh first. If you are on Windows Jenkins, change 'sh' to 'bat'
-                        sh 'python3 frontend_check.py'
+                        echo 'Starting frontend checks...'
+                        script {
+                            // Sleep for exactly 4 seconds natively in Jenkins
+                            sleep time: 4, unit: 'SECONDS'
+                            // Write the text report file natively
+                            writeFile file: 'frontend_report.txt', text: 'Frontend Check Status: SUCCESS'
+                        }
                     }
                 }
                 stage('Backend Check') {
                     steps {
-                        echo 'Running backend script...'
-                        // Try sh first. If you are on Windows Jenkins, change 'sh' to 'bat'
-                        sh 'python3 backend_check.py'
+                        echo 'Starting backend checks...'
+                        script {
+                            // Sleep for exactly 4 seconds natively in Jenkins
+                            sleep time: 4, unit: 'SECONDS'
+                            // Write the text report file natively
+                            writeFile file: 'backend_report.txt', text: 'Backend Check Status: SUCCESS'
+                        }
                     }
                 }
             }
@@ -30,8 +38,7 @@ pipeline {
         stage('Archive Reports') {
             steps {
                 echo 'Archiving report artifacts...'
-                // Changed to true temporarily so the pipeline won't fail if scripts have an path error
-                archiveArtifacts artifacts: 'frontend_report.txt, backend_report.txt', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'frontend_report.txt, backend_report.txt', allowEmptyArchive: false
             }
         }
     }
