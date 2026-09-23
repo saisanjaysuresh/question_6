@@ -14,9 +14,7 @@ pipeline {
                     steps {
                         echo 'Starting frontend checks...'
                         script {
-                            // Sleep for exactly 4 seconds natively in Jenkins
                             sleep time: 4, unit: 'SECONDS'
-                            // Write the text report file natively
                             writeFile file: 'frontend_report.txt', text: 'Frontend Check Status: SUCCESS'
                         }
                     }
@@ -25,9 +23,7 @@ pipeline {
                     steps {
                         echo 'Starting backend checks...'
                         script {
-                            // Sleep for exactly 4 seconds natively in Jenkins
                             sleep time: 4, unit: 'SECONDS'
-                            // Write the text report file natively
                             writeFile file: 'backend_report.txt', text: 'Backend Check Status: SUCCESS'
                         }
                     }
